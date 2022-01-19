@@ -15,13 +15,12 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo_id')->unsigned();
+            $table->unsignedBigInteger('codigo_id')->unsigned()->index();
             $table->integer('minimo_vidas');
             $table->double('faixa1',10,2);
             $table->double('faixa2',10,2);
             $table->double('faixa3',10,2);
             $table->foreign('codigo_id')->references('id')->on('plans')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

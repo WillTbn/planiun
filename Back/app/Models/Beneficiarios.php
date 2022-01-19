@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Prices extends Model
+class Beneficiarios extends Model
 {
     public $timestamps = false;
     use HasFactory;
-
-    public function beneficiario()
+    protected $fillable = ['codigo_id', 'quantidade', 'plan_data'];
+    public function plans()
     {
-        return $this->belongsTo(beneficiario::class);
+        return $this->hasMany(Plans::class);
     }
 }
