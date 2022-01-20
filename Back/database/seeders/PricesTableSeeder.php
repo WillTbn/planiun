@@ -15,60 +15,60 @@ class PricesTableSeeder extends Seeder
     public function run()
     {
         Prices::create([
-            'codigo_id'=> 1,
-            'minimo_vidas'=> 1,
-            'faixa1'=> 10.00,
-            'faixa2'=> 12,
-            'faixa3'=> 15.00
+            'code_id'=> 1,
+            'minimum_lives'=> 1,
+            'range1'=> 10.00,
+            'range2'=> 12,
+            'range3'=> 15.00
         ]);
         Prices::create([
-            'codigo_id'=> 1,
-            'minimo_vidas'=> 4,
-            'faixa1'=> 9,
-            'faixa2'=> 11.00,
-            'faixa3'=> 14.00
+            'code_id'=> 1,
+            'minimum_lives'=> 4,
+            'range1'=> 9,
+            'range2'=> 11.00,
+            'range3'=> 14.00
         ]);
         Prices::create([
-            'codigo_id'=> 2,
-            'minimo_vidas'=> 1,
-            'faixa1'=> 20.00,
-            'faixa2'=> 30,
-            'faixa3'=> 40.00
+            'code_id'=> 2,
+            'minimum_lives'=> 1,
+            'range1'=> 20.00,
+            'range2'=> 30,
+            'range3'=> 40.00
         ]);
         Prices::create([
-            'codigo_id'=> 3,
-            'minimo_vidas'=> 1,
-            'faixa1'=> 30,
-            'faixa2'=> 40.00,
-            'faixa3'=> 50
+            'code_id'=> 3,
+            'minimum_lives'=> 1,
+            'range1'=> 30,
+            'range2'=> 40.00,
+            'range3'=> 50
         ]);
         Prices::create([
-            'codigo_id'=> 4,
-            'minimo_vidas'=> 1,
-            'faixa1'=> 40.00,
-            'faixa2'=> 50.00,
-            'faixa3'=> 60
+            'code_id'=> 4,
+            'minimum_lives'=> 1,
+            'range1'=> 40.00,
+            'range2'=> 50.00,
+            'range3'=> 60
         ]);
         Prices::create([
-            'codigo_id'=> 5,
-            'minimo_vidas'=> 1,
-            'faixa1'=> 50,
-            'faixa2'=> 60.00,
-            'faixa3'=> 70.00
+            'code_id'=> 5,
+            'minimum_lives'=> 1,
+            'range1'=> 50,
+            'range2'=> 60.00,
+            'range3'=> 70.00
         ]);
         Prices::create([
-            'codigo_id'=> 6,
-            'minimo_vidas'=> 1,
-            'faixa1'=> 60,
-            'faixa2'=> 70,
-            'faixa3'=> 80
+            'code_id'=> 6,
+            'minimum_lives'=> 1,
+            'range1'=> 60,
+            'range2'=> 70,
+            'range3'=> 80
         ]);
         Prices::create([
-            'codigo_id'=> 6,
-            'minimo_vidas'=> 2,
-            'faixa1'=> 55.00,
-            'faixa2'=> 65.00,
-            'faixa3'=> 75.00
+            'code_id'=> 6,
+            'minimum_lives'=> 2,
+            'range1'=> 55.00,
+            'range2'=> 65.00,
+            'range3'=> 75.00
         ]);
     }
 }

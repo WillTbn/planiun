@@ -12,6 +12,6 @@ class Prices extends Model
 
     public function beneficiario()
     {
-        return $this->belongsTo(beneficiario::class);
+        return $this->belongsTo(beneficiaries::class);
     }
 }

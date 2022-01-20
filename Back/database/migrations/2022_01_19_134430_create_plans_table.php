@@ -15,8 +15,8 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('registro');
-            $table->string('nome');
+            $table->string('record');
+            $table->string('name');
         });
     }
 

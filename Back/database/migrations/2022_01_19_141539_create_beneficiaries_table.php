@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBeneficiariosTable extends Migration
+class CreateBeneficiariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateBeneficiariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('beneficiarios', function (Blueprint $table) {
+        Schema::create('beneficiaries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('codigo_id')->unsigned()->index();
-            $table->integer('quantidade');
-            $table->text('plan_data');
+            $table->unsignedBigInteger('code_id')->unsigned()->index();
+            $table->integer('quant_benef');
+            $table->text('data_benef');
+            $table->double('price_total', 10,2);
         });
     }
 
@@ -28,6 +29,6 @@ class CreateBeneficiariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beneficiarios');
+        Schema::dropIfExists('beneficiaries');
     }
 }
