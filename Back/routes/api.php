@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/plans', [PlansController::class, 'index']);
 
-Route::post('/contract', [BeneficiariesController::class, 'create']);
+Route::post('/contract', [BeneficiariesController::class, 'retornContract']);
+
+Route::post('/create', [BeneficiariesController::class, 'create']);

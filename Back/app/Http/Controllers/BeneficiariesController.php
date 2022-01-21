@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 
 class beneficiariesController extends Controller
 {
-    public function create(Request $request, Beneficiaries $beneficiaries)
+    public function retornContract(Request $request, Beneficiaries $beneficiaries)
     {   
-
-        return $beneficiaries->createBeneficiaries($request);
-        
-        
+        return $beneficiaries->retorneBeneficiaries($request);
+    }
+    public function create(Request $request, Beneficiaries $beneficiaries)
+    {
+        return $beneficiaries->createBenef($request);
+        //return $request->all();        
     }
 }

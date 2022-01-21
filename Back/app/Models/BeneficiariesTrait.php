@@ -4,10 +4,16 @@ trait BeneficiariesTrait
 {
     public function getNameIdade($name, $ages)
     {
-        return [
-            'nome' => explode(',',$name),
-            'ages' => explode(',',$ages)
-        ];
+        $arrayName = explode(',',$name);
+        $arrayAges = explode(',',$ages);
+        if(count($arrayName) == count($arrayAges)) {
+            return [
+                'nome' => $arrayName,
+                'ages' => $arrayAges
+            ];
+        }else{
+            return false;
+        }
     }
     public function setPrice($ages, $minimum)
     {
@@ -28,7 +34,7 @@ trait BeneficiariesTrait
     {
         $item=[];
         for($i=0;$i<count($dataArray['nome']);){
-            $item[] =[
+            $item[$i] =[
                 'name'=> $dataArray['nome'][$i],
                 'ages' => $dataArray['ages'][$i],
                 'price' =>$dataArray['price'][$i]
