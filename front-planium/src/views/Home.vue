@@ -8,13 +8,14 @@
                     Escolha um de nossos planos
                 </h1>
             </b-col>
-            <b-col v-for="(plan, index) in plans" :key="index" class="select">
+            <b-col v-for="(plan, index) in plans" :key="index" >
                 <b-card 
                     v-model="newPlans.id" 
                     bg-variant="light" 
                     :header=plan.record 
-                    class="text-center" 
+                    class="text-center select" 
                     @click.prevent="setPlan(plan,index,'add')"
+                    
                 >
                     <b-card-text>{{plan.name}}</b-card-text>
                 </b-card>
@@ -30,7 +31,7 @@
         </b-button>
     </b-container>
     <b-container v-if="mode == 'dados'" class="text-center">        
-        <b class="h5 font-weight-bolder"> Adicionar beneficiarios</b> 
+        <b class="h5 font-weight-bolder my-md-2"> Adicionar beneficiarios</b> 
         <b-row align-h="center">
             <b-col cols="4">
                 <b-card>
@@ -125,31 +126,44 @@
             </b-col>
         </b-row>
         <b-row align-h="center">
-            <b-col>
+            <b-col class="my-3">
                  <b-button @click="select = 'two'" variant="outline-success" size="sm" v-if="select== ''"> 
+                    Adicionar 
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </b-button>
                 <b-button @click="select = 'six'" variant="outline-success" size="sm" v-if="select == 'five'"> 
+                    Adicionar 
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </b-button>
                 <b-button @click="select = 'three'" variant="outline-success" size="sm" v-if="select == 'two'">
+                    Adicionar 
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </b-button>
                 <b-button @click="select = 'four'" variant="outline-success" size="sm" v-if="select == 'three'">
+                    Adicionar 
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </b-button>
                 <b-button @click="select = 'five'" variant="outline-success" size="sm" v-if="select == 'four'">
+                    Adicionar 
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </b-button>
                 <b-button @click="addNo()" variant="outline-success" size="sm" v-if="select == 'six'">
+                    Adicionar 
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </b-button>
             </b-col>
         </b-row>
-        <b-row align-h="center">
+        <b-row align-h="between">
             <b-col>
-                <b-button @click="sendPost()">
-                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                <b-button @click="mode = 'start'" variant="danger">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    Volta
+                </b-button>
+            </b-col>
+            <b-col>
+                <b-button @click="sendPost()" variant="success">
+                    Avançar
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                 </b-button>
             </b-col>
         </b-row>
@@ -173,6 +187,11 @@
                 </b-card>
             </b-col>
         </b-row>
+        <b-row align-h="center" class="my-3">
+            <b-col cols="3">
+                <a :href=this.urlLink target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+            </b-col>
+        </b-row>
         <b-row align-h="between">
             <b-col>
                 <b-button @click="mode = 'dados'" variant="danger">
@@ -194,6 +213,11 @@
                 <h1 class="h2">Completo </h1>
                 <p>Dados enviado com sucesso</p>
                 <p class="text-muted">Esse projeto tem como finalidade teste de conhecimento para empresa Platium.</p>
+            </b-col>
+        </b-row>
+        <b-row align-h="center" class="my-3">
+            <b-col cols="3">
+                <a :href=this.urlProposta target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
             </b-col>
         </b-row>
     </b-container>
@@ -222,7 +246,9 @@ export default {
             benefSix:{},
             select:'',
             send:{},
-            dados:''
+            dados:'',
+            urlLink:'',
+            urlProposta:''
         }
     },
     methods: {
@@ -250,9 +276,11 @@ export default {
             this.$toasted.show('Numero máximo de beneficiarios atingido', {position: "top-center", duration: 2000})
         },
         getPlans(){
+            this.show = true
             const url = 'http://127.0.0.1:8000/api/plans'
             axios.get(url).then(res=>{
                 this.plans = res.data
+                this.show = false
             })
         },
         setPlan(plans, index){
@@ -263,12 +291,12 @@ export default {
                 'plans': this.newPlans.id
             }
             const filterSelect = Array.prototype.filter.call(sle, function(item){
-                return item.classList.contains('bg-danger')
+                return item.classList.contains('selectSer')
             })
             if(filterSelect != ''){
-                filterSelect[0].classList.remove('bg-danger')
+                filterSelect[0].classList.remove('selectSer')
             }
-            sle[index].classList.add('bg-danger')
+            sle[index].classList.add('selectSer')
             console.log(sle[index])
             this.mode = 'select'
         },
@@ -302,7 +330,8 @@ export default {
                 this.show = true
                 axios.post(url, this.send).then(res=>{
                     this.dados = res.data.data
-                    console.log(res.data.data)
+                    this.urlLink = res.data.url
+                    console.log(res.data.url)
                     this.mode = 'sucesso'
                 }).catch(error=>this.$toasted.error(error),{position: "top-center", duration: 2000}).finally(()=>this.show = false)
 
@@ -316,6 +345,7 @@ export default {
             const url = 'http://127.0.0.1:8000/api/create'
             axios.post(url, this.dados).then(res=>{
                 console.log(res.data)
+                this.urlProposta = res.data.urlProposta
                 this.mode = 'finally'
             }).catch(error=>this.$toasted.error(error,{position: "top-center", duration: 2000})).finally(()=>this.show = false)
         }
@@ -333,6 +363,7 @@ export default {
     border:3px solid #484848 !important
 }
 .selectSer{
-    border:3px solid #cc0a0a !important
+    border:3px solid #28a745 !important;
+    margin-top: 1rem;
 }
 </style>

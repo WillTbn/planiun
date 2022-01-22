@@ -43,4 +43,24 @@ trait BeneficiariesTrait
         }
         return $item;
     }
+    public function setJson($quantidade, $registro, $dataArray)
+    {   
+        $dadosJson = [
+            'quantidade' => count($dataArray['nome']),
+            'idade' => $dataArray['ages'],
+            'nome' =>  $dataArray['nome'],
+            'registro' => $registro,
+        ];
+        file_put_contents('beneficiarios.json', json_encode($dadosJson));
+    }
+    public function setJsonProposta($dados)
+    {
+        $json = [
+            'registro' => $dados->code_id,
+            'quantidade' => $dados->quant_benef,
+            'dados' => $dados->data_benef,
+            'preco_total' => $dados->price_total
+        ];
+        file_put_contents('proposta.json', json_encode($json));
+    }
 }

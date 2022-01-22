@@ -13,7 +13,6 @@ class beneficiariesController extends Controller
     }
     public function create(Request $request, Beneficiaries $beneficiaries)
     {
-        return $beneficiaries->createBenef($request);
-        //return $request->all();        
+       return $beneficiaries->createBenef($request);
     }
 }

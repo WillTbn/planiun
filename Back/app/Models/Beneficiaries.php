@@ -65,18 +65,16 @@ class Beneficiaries extends Model
                     $soma = collect($data_benef)->sum('price');
                     
                 }
-                //return dd(count($dataArray['nome']));
-                //return $dataArray;
-                //return $data_benef;
                 $beneficiaries = [
                    'code_id' => $plans,
                    'quant_benef' => count($dataArray['nome']),
                    'data_benef' => $data_benef,
-                   'price_total' => $soma
+                   'price_total' => $soma,
                 ];
-               //$beneficiaries->save();
-               return response()->json(array('succes' => true,'data'=>$beneficiaries),200);
-               //return $beneficiaries; 
+                $this->setJson(count($dataArray['nome']), $plans,$dataArray);
+                
+                return response()->json(array('succes' => true,'data'=>$beneficiaries,'url'=> 'http://127.0.0.1:8000/beneficiarios.json'),200);
+                
             }
             return response()->json(array('error'=>'Plano Selecionado inexistente'),500);
         }else{
@@ -94,7 +92,8 @@ class Beneficiaries extends Model
         ]);
         if($beneficiaries)
         {
-            return response()->json(array('succes' => true,'data'=>$beneficiaries),200);
+            $this->setJsonProposta($request);
+            return response()->json(array('succes' => true,'data'=>$beneficiaries, 'urlProposta'=> 'http://127.0.0.1:8000/proposta.json'),200);
         }else{
             return response()->json(array('error'=>'Verifique os campos enviados'),500);
         }
